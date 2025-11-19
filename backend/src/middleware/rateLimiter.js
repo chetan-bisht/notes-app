@@ -4,7 +4,7 @@ import ratelimit from '../config/upstash.js';
 const rateLimiter = async (req, res, next) => {
 
     try {
-        const {success} = await ratelimit.limit(req.ip);// you can customize the key based on user IP or user ID
+        const {success} = await ratelimit.limit("my-unique-identifier");// can use req.ip for real client IP
 
         if (!success) {
             return res.status(429).json({ message: 'Too many requests, please try again later.' });
